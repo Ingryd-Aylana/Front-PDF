@@ -1,0 +1,21 @@
+.export-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 43px auto;
+  width: 100%;
+}
+
+.export-wrapper button {
+  padding: 15px 24px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.export-wrapper button:hover {
+  background-color: #0056b3;
+}
