@@ -15,16 +15,15 @@ export default function SummaryCard({ dadosGrupo }) {
 
   return (
     <section className="card">
-      <div className="subcard">
-        <h1>Dados do Grupo</h1>
-        <hr />
-        <p><strong>Administradora:</strong> {administradora}</p>
-        <p><strong>Valor do Prêmio:</strong> R$ {valorPremio.toLocaleString('pt-BR')}</p>
-        <p><strong>Valor da Comissão:</strong> R$ {valorComissao.toLocaleString('pt-BR')}</p>
-      </div>
-      {/* <button onClick={handlePreview}>Visualizar Relatório</button> */}
-      {/* <br /><br /> */}
-      <button onClick={teste}>Ação</button>
+    <div className="subcard">
+      <h1>Dados do Grupo</h1>
+      <hr />
+      <p><strong>Administradora:</strong> {administradora}</p>
+      <p><strong>Valor do Prêmio:</strong> R$ {valorPremio.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+      <p><strong>Valor da Comissão:</strong> R$ {valorComissao.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+     
+    </div>
+     
     </section>
   );
 }

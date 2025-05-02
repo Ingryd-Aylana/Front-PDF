@@ -32,8 +32,8 @@ export default function App() {
       setDadosGrupo({
         // Para SummaryCard
         administradora: primeiro['Administradora'] || 'Não informado',
-        valorPremio: Number(primeiro['Prêmio']) || 0,
-        valorComissao: Number(primeiro['Repasse']) || 0,
+        valorPremio: jsonData.reduce((acc, cur) => acc + Number(cur['Prêmio'] || 0), 0),
+        valorComissao: jsonData.reduce((acc, cur) => acc + Number(cur['Repasse'] || 0), 0),
 
         // Para CoverReport
         produtor: primeiro['Nome do Produtor'] || 'Não informado',
@@ -77,7 +77,7 @@ export default function App() {
                 <DetailedReport dados={dadosPlanilha} />
               </div>
             </div>
-            <ExportPDFButton targetRef={relatorioRef} />
+            <ExportPDFButton targetRef={relatorioRef} nomeProdutor={dadosGrupo.produtor} />
           </>
         )}
       </main>

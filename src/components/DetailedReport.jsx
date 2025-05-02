@@ -5,12 +5,12 @@ export default function DetailedReport({ dados = [] }) {
   if (!dados.length) return null;
 
   const hoje = new Date().toLocaleDateString('pt-BR');
-  const produtorNome = dados[0]?.Produtor || 'Produtor Desconhecido';
+  const produtorNome = dados[0]?.['Nome do Produtor'] || 'Produtor Desconhecido';
 
   return (
     <section className="detailed-report" id="pagina-detalhada">
       <header className="report-header">
-        <img src="/assets/logo.png" alt="Logo" className="report-logo" />
+      <img src="/assets/logo.png" alt="Logo" className="overlay-logo" />
         <div>
           <h3>{produtorNome}</h3>
           <p className="report-date">Gerado em: {hoje}</p>

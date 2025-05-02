@@ -23,7 +23,7 @@
   .report-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
+    background-color: #a6a8aa;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
@@ -43,6 +43,6 @@
   }
   
   .report-table td {
-    color: #374151;
+    color: black;
   }
   

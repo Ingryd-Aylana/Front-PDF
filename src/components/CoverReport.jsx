@@ -1,6 +1,7 @@
 import React from 'react';
 import './CoverReport.css';
 
+
 export default function CoverReport({ dadosCapa }) {
   const hoje = new Date().toLocaleDateString('pt-BR');
   const {

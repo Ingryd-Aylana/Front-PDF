@@ -52,21 +52,22 @@ export default function UploadCard({ onDataParsed }) {
   const handleSendSpreadsheet = () => {
     console.log("📤 Enviando os dados da planilha para o back-end...", dados);
 
-    // Exemplo de integração futura
-    /*
-    fetch(' ', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
-    })
-    .then(response => response.json())
-    .then(result => {
-      console.log('✅ Sucesso:', result);
-    })
-    .catch(error => {
-      console.error('❌ Erro ao enviar:', error);
-    });
-    */
+    const enviarParaBack = async (jsonData) => {
+      try {
+        const response = await fetch("http://localhost:3000/api/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ dados: jsonData }),
+        });
+    
+        const resultado = await response.json();
+        console.log("Resposta do servidor:", resultado);
+      } catch (erro) {
+        console.error("Erro ao enviar:", erro);
+      }
+    };
   };
 
   return (
@@ -90,7 +91,7 @@ export default function UploadCard({ onDataParsed }) {
           ⚠️ {error}
         </p>
       )}
-<br /><br />
+
       <button
         className="btn btn-primary"
         style={{ marginTop: '10px' }}
