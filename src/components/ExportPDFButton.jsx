@@ -19,7 +19,7 @@ export default function ExportPDFButton({ targetRef, nomeProdutor }) {
         scale: 3,
         useCORS: true,
         backgroundColor: '#ffffff',
-        // windowWidth: 1920,
+        windowWidth: 1920,
       });
 
       const imgData = canvas.toDataURL('image/png');

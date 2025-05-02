@@ -21,7 +21,7 @@ export default function SummaryCard({ dadosGrupo }) {
       <p><strong>Administradora:</strong> {administradora}</p>
       <p><strong>Valor do Prêmio:</strong> R$ {valorPremio.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
       <p><strong>Valor da Comissão:</strong> R$ {valorComissao.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-     
+      
     </div>
      
     </section>
