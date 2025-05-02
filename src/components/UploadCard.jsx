@@ -39,8 +39,8 @@ export default function UploadCard({ onDataParsed }) {
           return;
         }
 
-        setDados(jsonData);            // Armazenando localmente
-        onDataParsed(jsonData);        // Passando para o App
+        setDados(jsonData);           // Armazenando localmente
+        onDataParsed(jsonData);       // Envia para o App
       } catch (err) {
         setError('Erro ao processar o arquivo. Verifique o conteúdo e tente novamente.');
       }
@@ -49,28 +49,24 @@ export default function UploadCard({ onDataParsed }) {
     reader.readAsArrayBuffer(file);
   };
 
-  const handleSendSpreadsheet = () => {
-    console.log("📤 Enviando os dados da planilha para o back-end...", dados);
+  const handleSendSpreadsheet = async () => {
+    if (dados.length === 0) return;
 
-    // Variavel para enviar arquivo para o back
-   const enviarParaBack = async (jsonData) => {
-  try {
-    const response = await fetch("http://localhost:3000/api/upload", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ dados: jsonData }),
-    });
+    try {
+      const response = await fetch('http://localhost:3000/relatorio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+      });
 
-    const resultado = await response.json();
-    console.log("Resposta do servidor:", resultado);
-  } catch (erro) {
-    console.error("Erro ao enviar:", erro);
-  }
-};
+      const resultado = await response.json();
+      console.log('✅ Planilha enviada com sucesso:', resultado.mensagem);
+    } catch (erro) {
+      console.error('❌ Erro ao enviar planilha:', erro);
+    }
   };
 
+  // ⬇️ JSX principal do componente (corrigido para estar fora da função acima)
   return (
     <section className="card">
       <h2>📄 Importar Arquivo Excel</h2>
@@ -80,7 +76,7 @@ export default function UploadCard({ onDataParsed }) {
         onChange={handleFileUpload}
         className="file-input"
       />
-      
+
       {fileName && (
         <p style={{ marginTop: '10px' }}>
           📁 Arquivo selecionado: <strong>{fileName}</strong>
@@ -92,7 +88,8 @@ export default function UploadCard({ onDataParsed }) {
           ⚠️ {error}
         </p>
       )}
-<br /><br />
+
+      <br /><br />
       <button
         className="btn btn-primary"
         style={{ marginTop: '10px' }}
@@ -104,3 +101,4 @@ export default function UploadCard({ onDataParsed }) {
     </section>
   );
 }
+

@@ -23,6 +23,21 @@ export default function App() {
 
   const relatorioRef = useRef();
 
+  const enviarParaBackEnd = async (dados) => {
+    try {
+      const resposta = await fetch('http://localhost:3000/relatorio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+      });
+
+      const resultado = await resposta.json();
+      console.log('Servidor respondeu:', resultado.mensagem);
+    } catch (erro) {
+      console.error('Erro ao enviar dados para o back-end:', erro);
+    }
+  };
+
   const handleDataParsed = (jsonData) => {
     setDadosPlanilha(jsonData);
 
@@ -30,12 +45,9 @@ export default function App() {
       const primeiro = jsonData[0];
 
       setDadosGrupo({
-        // Para SummaryCard
         administradora: primeiro['Administradora'] || 'Não informado',
         valorPremio: jsonData.reduce((acc, cur) => acc + Number(cur['Prêmio'] || 0), 0),
         valorComissao: jsonData.reduce((acc, cur) => acc + Number(cur['Repasse'] || 0), 0),
-
-        // Para CoverReport
         produtor: primeiro['Nome do Produtor'] || 'Não informado',
         pagamento: primeiro['Dados de Pagamento'] || 'Não informado',
         contato: primeiro['Contato'] || 'Não informado',
@@ -44,6 +56,9 @@ export default function App() {
         premio: jsonData.reduce((acc, cur) => acc + Number(cur['Prêmio'] || 0), 0),
         repasse: jsonData.reduce((acc, cur) => acc + Number(cur['Repasse'] || 0), 0),
       });
+
+      // ✅ Envio automático ao back-end
+      enviarParaBackEnd(jsonData);
     } else {
       setDadosGrupo({
         administradora: 'Não informado',
