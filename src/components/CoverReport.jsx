@@ -16,31 +16,52 @@ export default function CoverReport({ dadosCapa }) {
 
   return (
     <section className="cover">
-      <img src="/assets/foto-produto.png" alt="Fundo do Relatório" className="background-image" />
+      <div className="cover-top">
+      <img
+        src="https://i.postimg.cc/3wCW7h3v/img-capa-9.jpg"
+        alt="Fundo do Relatório"
+        className="background-image"
+      />
 
-      <div className="overlay-content">
-        <img src="/assets/logo2.png" alt="Logo" className="overlay-logo" />
-        <h1 className="overlay-title">Relatório de Comissões</h1>
+        {/* LOGO no topo da imagem */}
+       <img
+          src="https://i.postimg.cc/dtb0y31C/logo2.png"
+          alt="Logo"
+          className="overlay-logo"
+        />
+
+        {/* Título sobre a imagem */}
+        <div className="title-container">
+          <h1>RELATÓRIO DE MILHAGEM</h1>
+          <hr />
+        </div>
       </div>
 
-      <div className="cards-wrapper">
-        <div className="glass-card">
+      {/* Parte inferior cinza */}
+      <div className="cover-bottom">
+        <div className="glass-card wide">
           <h3>Produtor</h3>
+          <hr />
           <p><strong>Nome:</strong> {produtor}</p>
           <p><strong>Dados de Pagamento:</strong> {pagamento}</p>
           <p><strong>Contato:</strong> {contato}</p>
           <p><strong>E-mail:</strong> {email}</p>
         </div>
 
-        <div className="glass-card">
+        <div className="glass-card wide">
           <h3>Resumo de Vendas</h3>
-          <p><strong>Total de Apólices:</strong> {totalApolices}</p>
-          <p><strong>Valor Total Vendido:</strong> R$ {Number(premio).toLocaleString('pt-BR')}</p>
-          <p><strong>Valor Total Repasse:</strong> R$ {Number(repasse).toLocaleString('pt-BR')}</p>
+          <hr />
+          <p><strong>Apólices:</strong> {totalApolices}</p>
+          <p><strong>Total Vendido:</strong> R$ {Number(premio).toLocaleString('pt-BR')}</p>
+          <p><strong>Total:</strong> R$ {Number(repasse).toLocaleString('pt-BR')}</p>
+        </div>
+        <div className='text'>
+          <p className="report-date">Gerado em: {hoje}</p>
+          <p>
+            ESTRATÉGIA E EXCELÊNCIA NA EXECUÇÃO GERAM CRESCIMENTO E VALOR.
+          </p>
         </div>
       </div>
-
-      <p className="report-date">Gerado em: {hoje}</p>
     </section>
   );
 }

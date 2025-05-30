@@ -1,50 +1,91 @@
 .detailed-report {
-    padding: 2rem;
-    background-color: #f9fafb;
-    min-height: 100vh;
-  }
-  
-  .report-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-  }
-  
-  .report-logo {
-    height: 70px;
-  }
-  
-  .report-date {
-    font-size: 0.85rem;
-    font-style: italic;
-    color: black;
-    margin-top: 10px;
-  }
-  
-  .report-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #a6a8aa;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
-  }
-  
-  .report-table th,
-  .report-table td {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    border-bottom: 1px solid #e5e7eb;
-  }
-  
-  .report-table th {
-    background-color: #173e74;
-    color: white;
-    font-weight: 600;
-  }
-  
-  .report-table td {
-    color: black;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+/* Cabeçalho com logo e faixa azul */
+.report-header {
+  display: flex;
+  align-items: stretch;
+  height: 100px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Card da logo com recorte diagonal à direita */
+.logo-box {
+  background-color: #0F3D5D;
+  position: relative;
+  width: 350px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
+}
+
+.logo-img {
+  max-width: 80%;
+  max-height: 60px;
+  object-fit: contain;
+
+}
+
+/* Faixa azul claro com recorte diagonal à esquerda */
+.header-banner {
+  flex: 1;
+  background-color: #328FCE;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+  color: white;
+  width: 100%;
+  max-width: 400px; 
+}
+
+.banner-content h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.report-date {
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* Tabela */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #d3d3d2;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.report-table th {
+  background-color: #0F3D5D;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  padding: 12px 10px;
+  font-size: 14px;
+}
+
+.report-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  font-size: 13px;
+}
+
+.report-table tr {
+  background-color: #d3d3d2;
+}

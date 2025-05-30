@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Relatório de Comissões</title>
+          <style type="text/css" data-vite-dev-id="C:/Users/gpfed/OneDrive/Documentos/LEHCIM/01-CÓDIGOS/PDF-BBZ-front/src/components/CoverReport.css">.cover {
+  width: 794px;
+  height: 1122px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: auto;
+  position: relative;
+  padding: 3rem 2rem;
+  background-size: cover;
+  background-position: center;
+  page-break-after: always;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  width: 794px;
+  height: 1122px;
+  object-fit: cover;
+  filter: brightness(0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.overlay-content {
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.overlay-logo {
+  height: 70px;
+  margin-bottom: 8rem;
+}
+
+.overlay-title {
+  font-size: 2.6rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+  margin-bottom: 2rem;
+  color: white;
+
+}
+
+.cards-wrapper {
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.glass-card {
+  backdrop-filter: blur(15px);
+  background: rgba(165, 164, 164, 0.5);
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 300px;
+  max-width: 90%;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card h3 {
+  margin-top: 0;
+  font-size: 18px;
+  color: white;
+}
+
+.report-date {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  z-index: 2;
+  color: white;
+  font-style: italic;
+}
+</style>
+<style type="text/css" data-vite-dev-id="C:/Users/gpfed/OneDrive/Documentos/LEHCIM/01-CÓDIGOS/PDF-BBZ-front/src/components/DetailedReport.css">.detailed-report {
+  padding: 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.report-header {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: space-between; /* Logo à esquerda, texto à direita */
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.report-header img.overlay-logo {
+  height: 70px;
+  object-fit: contain;
+}
+
+.report-header div {
+  text-align: right;
+}
+
+.report-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.report-date {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: black;
+  margin-top: 4px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #a6a8aa;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+.report-table th,
+.report-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.report-table th {
+  background-color: #173e74;
+  color: white;
+  font-weight: 600;
+}
+
+.report-table td {
+  color: black;
+}
+</style>
+<style type="text/css" data-vite-dev-id="C:/Users/gpfed/OneDrive/Documentos/LEHCIM/01-CÓDIGOS/PDF-BBZ-front/src/components/ExportPDFButton.css">.export-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 43px auto;
+  width: 100%;
+}
+
+.export-wrapper button {
+  padding: 15px 24px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.export-wrapper button:hover {
+  background-color: #0056b3;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+<style type="text/css" data-vite-dev-id="C:/Users/gpfed/OneDrive/Documentos/LEHCIM/01-CÓDIGOS/PDF-BBZ-front/src/print.css">body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f3f4f6d7;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #173e74;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  height: 50px;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.subcard {
+  margin-bottom: .75rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* print.css */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background-color: white;
+  }
+
+  .cover {
+    width: 794px;
+    height: 1122px;
+    padding: 40px;
+    box-sizing: border-box;
+    page-break-after: always;
+    background-color: white;
+  }
+
+  .glass-card,
+  .overlay-content {
+    color: black !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid #000 !important;
+    color: black !important;
+  }
+
+  * {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+}</style>
+        </head>
+        <body>
+          <div class="page"><section class="cover"><img alt="Fundo do Relatório" class="background-image" src="/assets/foto-produto.png"><div class="overlay-content"><img alt="Logo" 
+class="overlay-logo" src="/assets/logo2.png"><h1 class="overlay-title">Relatório de Comissões</h1></div><div class="cards-wrapper"><div class="glass-card"><h3>Produtor</h3><p><strong>Nome:</strong> ACPL ADM DE IMOVEIS LTDA</p><p><strong>Dados de Pagamento:</strong> Não informado</p><p><strong>Contato:</strong> Não informado</p><p><strong>E-mail:</strong> Não informado</p></div><div class="glass-card"><h3>Resumo de Vendas</h3><p><strong>Total de Apólices:</strong> 9</p><p><strong>Valor Total Vendido:</strong> R$ 4.539,38</p><p><strong>Valor 
+Total Repasse:</strong> R$ 421,88</p></div></div><p class="report-date">Gerado em: 05/05/2025</p></section></div><div class="page"><section class="detailed-report" id="pagina-detalhada"><header class="report-header"><img alt="Logo" class="overlay-logo" src="/assets/logo.png"><div><h3>ACPL ADM DE IMOVEIS LTDA</h3><p class="report-date">Gerado em: 05/05/2025</p></div></header><table class="report-table"><thead><tr><th>Segurado</th><th>Apólice</th><th>Início Vig.</th><th>Parc.</th><th>Pr. Líq. Parc.</th><th>Vl. Repasse</th></tr></thead><tbody><tr><td>CONDOMINIO DO EDIFICIO JOAO DE AQUINO</td><td>119002917</td><td>25/03/2025</td><td>1/6</td><td>R$ 581,69</td><td>R$ 58,17</td></tr><tr><td>ADESSE EMPREENDIMENTOS IMOBILIARIOS S/S</td><td>10660</td><td>01/04/2025</td><td>1/1</td><td>R$ 163,29</td><td>R$ 16,33</td></tr><tr><td>CONDOMINIO DO EDIFICIO MARILDA</td><td>010267</td><td>04/08/2024</td><td>9/10</td><td>R$ 122,26</td><td>R$ 12,23</td></tr><tr><td>CONDOMINIO DO EDIFICIO PUERTO BANUS</td><td>0032214</td><td>21/03/2025</td><td>1/6</td><td>R$ 557,77</td><td>R$ 83,66</td></tr><tr><td>CONDOMINIO DO EDIFICIO QUARTZO ROSA</td><td>202521160019492</td><td>24/03/2025</td><td>1/6</td><td>R$ 278,3</td><td>R$ 27,83</td></tr><tr><td>CONDOMINIO DO EDIFICIO BERNARD</td><td>235203</td><td>24/02/2025</td><td>2/2</td><td>R$ 855,5</td><td>R$ 114,08</td></tr><tr><td>CONDOMINIO DO ED SOLAR ECA DE QUEIROZ</td><td>00233347</td><td>30/11/2024</td><td>2/2</td><td>R$ 1.327,23</td><td>R$ 44,24</td></tr><tr><td>CONDOMINIO DO EDIFICIO VERONICA XV</td><td>1160066646</td><td>28/03/2025</td><td>1/10</td><td>R$ 311,2</td><td>R$ 31,12</td></tr><tr><td>CONDOMINIO DO EDIFICIO RESIDENCIAL CAROL</td><td>202421160080914</td><td>06/01/2025</td><td>4/6</td><td>R$ 342,14</td><td>R$ 34,22</td></tr></tbody></table></section></div>     
+        </body>
+      </html>

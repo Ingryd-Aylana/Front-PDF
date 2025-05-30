@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 
-export default function UploadCard({ onDataParsed }) {
+export default function UploadCard({ onDataParsed, mostrarRelatorio }) {
   const [fileName, setFileName] = useState('');
   const [error, setError] = useState('');
-  const [dados, setDados] = useState([]); // Estado local para envio futuro
+  const [dados, setDados] = useState([]);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -31,7 +31,6 @@ export default function UploadCard({ onDataParsed }) {
 
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-
         const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
 
         if (jsonData.length === 0) {
@@ -39,8 +38,8 @@ export default function UploadCard({ onDataParsed }) {
           return;
         }
 
-        setDados(jsonData);            // Armazenando localmente
-        onDataParsed(jsonData);        // Passando para o App
+        setDados(jsonData);
+        onDataParsed(jsonData);
       } catch (err) {
         setError('Erro ao processar o arquivo. Verifique o conteúdo e tente novamente.');
       }
@@ -52,23 +51,28 @@ export default function UploadCard({ onDataParsed }) {
   const handleSendSpreadsheet = () => {
     console.log("📤 Enviando os dados da planilha para o back-end...", dados);
 
-    // Variavel para enviar arquivo para o back
-   const enviarParaBack = async (jsonData) => {
-  try {
-    const response = await fetch("http://localhost:3000/api/upload", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ dados: jsonData }),
-    });
+    // Envia para o back (mesmo que falhe)
+    const enviarParaBack = async (jsonData) => {
+      try {
+        const response = await fetch("http://localhost:3000/api/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ dados: jsonData }),
+        });
 
-    const resultado = await response.json();
-    console.log("Resposta do servidor:", resultado);
-  } catch (erro) {
-    console.error("Erro ao enviar:", erro);
-  }
-};
+        const resultado = await response.json();
+        console.log("Resposta do servidor:", resultado);
+      } catch (erro) {
+        console.error("Erro ao enviar:", erro);
+      }
+    };
+
+    enviarParaBack(dados);
+
+    // ✅ Exibe o relatório independente do back-end
+    mostrarRelatorio();
   };
 
   return (
@@ -80,7 +84,7 @@ export default function UploadCard({ onDataParsed }) {
         onChange={handleFileUpload}
         className="file-input"
       />
-      
+
       {fileName && (
         <p style={{ marginTop: '10px' }}>
           📁 Arquivo selecionado: <strong>{fileName}</strong>
@@ -92,7 +96,8 @@ export default function UploadCard({ onDataParsed }) {
           ⚠️ {error}
         </p>
       )}
-<br /><br />
+
+    
       <button
         className="btn btn-primary"
         style={{ marginTop: '10px' }}
